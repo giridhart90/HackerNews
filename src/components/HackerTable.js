@@ -137,8 +137,8 @@ class HackerTable extends Component {
                                         <td>{item.num_comments}</td>
                                         <td>{item.points}</td>
                                         <td>
-                                            <button onClick={(e) => this.handleUpVote(this, item.objectID)} aria-describedby="upvoteDesc">
-                                                <div className="upvote"></div>
+                                            <button onClick={(e) => this.handleUpVote(this, item.objectID)} role="button" aria-describedby="upvoteDesc">
+                                                <div className="upvote"><span className="hide">upvote</span></div>
                                             </button>
                                             <p id="upvoteDesc" className="hide">Increase the vote count</p>
                                         </td>
@@ -146,7 +146,7 @@ class HackerTable extends Component {
                                             <b>{item.title} </b>
                                             ({item.url ? item.url.split('/')[2] : " "})
                                             by <b>{item.author}</b> | {item.created_at ? item.created_at.split('T')[0] : " "}
-                                            <button onClick={(e) => this.handleHideNews(this, item.objectID)} aria-describedby="hideDesc">[ hide ]</button>
+                                            <button onClick={(e) => this.handleHideNews(this, item.objectID)} role="button" aria-describedby="hideDesc">[ hide ]</button>
                                             <p id="hideDesc" className="hide">Hide selected rows</p>
                                         </td>
                                     </tr>
@@ -154,12 +154,12 @@ class HackerTable extends Component {
                             </tbody>
                         </Table>
                         <div className="prevNext">
-                            <button onClick={this.handlePrevious} aria-describedby="prevDesc" disabled={this.state.disabled}>Previous</button> |
-                            <button onClick={this.handleNext} aria-describedby="nextDesc">Next</button>
+                            <button onClick={this.handlePrevious} role="button" aria-describedby="prevDesc" disabled={this.state.disabled}>Previous</button> |
+                            <button onClick={this.handleNext} role="button" aria-describedby="nextDesc">Next</button>
                             <p id="prevDesc" className="hide">shows previous 20 grid results</p>
                             <p id="nextDesc" className="hide">shows next 20 grid results</p>
                         </div>
-                        <button onClick={this.handleClearStorage} className="storage" aria-describedby="storageDesc">Remove storage values</button>
+                        <button onClick={this.handleClearStorage} role="button" className="storage" aria-describedby="storageDesc">Remove storage values</button>
                         <p id="storageDesc" className="hide">Remove local storage values from browser</p>
                     </div>
                     <Chart getStateValue={this.state} aria-describedby="chartDesc" />
@@ -168,10 +168,10 @@ class HackerTable extends Component {
             );
         } else {
             return (
-                <>
+                <div className="spinner">
                     <Spinner style={{ width: '3rem', height: '3rem' }} aria-describedby="spinnerDesc" />
                     <p id="spinnerDesc" className="hide">Loading...</p>
-                </>
+                </div>
             );
         }
     }

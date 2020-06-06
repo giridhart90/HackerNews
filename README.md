@@ -7,6 +7,9 @@ Reactstrap provides prebuilt Bootstrap 4 components that allow a great deal of f
 ### Recharts
 Recharts provides charts functionality
 
+### Accessibility
+Used NVDA app for accessibility
+
 ### Deployed in github - Live Application
 https://giridhart90.github.io/HackerNews/
 
