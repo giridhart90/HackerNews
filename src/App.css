@@ -4,7 +4,7 @@
 }
 
 .hackerTable button {
-    border: navajowhite;
+    border: none;
     background: none;
 }
 
@@ -22,7 +22,8 @@
     color: orange;
 }
 
-.prevNext button {
+.prevNext button,
+.storage {
     color: orange;
     font-weight: 700;
 }
@@ -32,4 +33,8 @@
     border-top: 5px solid orange;
     padding: 20px 0;
     border-bottom: 5px solid orange;
+}
+
+.hide {
+    display: none;
 }

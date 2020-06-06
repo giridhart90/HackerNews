@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Table, Spinner } from 'reactstrap';
+import Chart from './Chart';
 
 class HackerTable extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class HackerTable extends Component {
         this.state = {
             commentsData: null,
             pageNo: 1,
-            disabled: true
+            disabled: true,
+            chartData: null
         }
     }
 
@@ -26,6 +28,7 @@ class HackerTable extends Component {
                 } else {
                     this.setState({ commentsData });
                 }
+                this.generateChartData(this.state.commentsData);
             });
     }
 
@@ -44,18 +47,20 @@ class HackerTable extends Component {
         });
         this.setState({ commentsData: commentsVal });
 
-        this.handleVoteHide(commentsVal);
+        this.updateLocalStorage(commentsVal);
+        this.generateChartData(commentsVal);
     }
 
     //on click of hide button action
     handleHideNews(e, id) {
         let commentsVal = this.state.commentsData.filter(item => item.objectID !== id);
         this.setState({ commentsData: commentsVal });
-        this.handleVoteHide(commentsVal);
+        this.updateLocalStorage(commentsVal);
+        this.generateChartData(commentsVal);
     }
 
     //on click of vote button action
-    handleVoteHide(commentsVal) {
+    updateLocalStorage(commentsVal) {
         let updatedNews = {};
         let storageNews = localStorage.getItem("updatedNews");
         if (storageNews) {
@@ -64,6 +69,20 @@ class HackerTable extends Component {
         updatedNews[this.state.pageNo] = commentsVal;
 
         localStorage.setItem("updatedNews", JSON.stringify(updatedNews));
+    }
+
+    //generate chart data
+    generateChartData(commentsVal) {
+        let aryVal = [];
+
+        aryVal = commentsVal.map(item => {
+            let chartObj = {};
+            chartObj.votes = item.points;
+            chartObj.ID = item.objectID;
+            return chartObj;
+        });
+
+        this.setState({ chartData: aryVal });
     }
 
     //handle upvote and hide  
@@ -101,42 +120,58 @@ class HackerTable extends Component {
     render() {
         if (this.state.commentsData) {
             return (
-                <div className="hackerTable">
-                    <Table striped size="sm" responsive>
-                        <thead>
-                            <tr>
-                                <th>Comments</th>
-                                <th>Vote Count</th>
-                                <th>UpVote</th>
-                                <th>News Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.commentsData.map((item) => {
-                                return <tr key={item.objectID}>
-                                    <td>{item.num_comments}</td>
-                                    <td>{item.points}</td>
-                                    <td><button onClick={(e) => this.handleUpVote(this, item.objectID)}><div className="upvote"></div></button></td>
-                                    <td>
-                                        <b>{item.title} </b>
-                                        ({item.url ? item.url.split('/')[2] : " "})
-                                        by <b>{item.author}</b> | {item.created_at ? item.created_at.split('T')[0] : " "}
-                                        <button onClick={(e) => this.handleHideNews(this, item.objectID)}>[ hide ]</button>
-                                    </td>
+                <>
+                    <div className="hackerTable">
+                        <Table striped size="sm" responsive>
+                            <thead>
+                                <tr>
+                                    <th>Comments</th>
+                                    <th>Vote Count</th>
+                                    <th>UpVote</th>
+                                    <th>News Details</th>
                                 </tr>
-                            })}
-                        </tbody>
-                    </Table>
-                    <div className="prevNext">
-                        <button onClick={this.handlePrevious} disabled={this.state.disabled}>Previous</button> |
-                        <button onClick={this.handleNext}>Next</button> |
-                        <button onClick={this.handleClearStorage}>Remove storage values</button>
+                            </thead>
+                            <tbody>
+                                {this.state.commentsData.map((item) => {
+                                    return <tr key={item.objectID}>
+                                        <td>{item.num_comments}</td>
+                                        <td>{item.points}</td>
+                                        <td>
+                                            <button onClick={(e) => this.handleUpVote(this, item.objectID)} aria-describedby="upvoteDesc">
+                                                <div className="upvote"></div>
+                                            </button>
+                                            <p id="upvoteDesc" className="hide">Increase the vote count</p>
+                                        </td>
+                                        <td>
+                                            <b>{item.title} </b>
+                                            ({item.url ? item.url.split('/')[2] : " "})
+                                            by <b>{item.author}</b> | {item.created_at ? item.created_at.split('T')[0] : " "}
+                                            <button onClick={(e) => this.handleHideNews(this, item.objectID)} aria-describedby="hideDesc">[ hide ]</button>
+                                            <p id="hideDesc" className="hide">Hide selected rows</p>
+                                        </td>
+                                    </tr>
+                                })}
+                            </tbody>
+                        </Table>
+                        <div className="prevNext">
+                            <button onClick={this.handlePrevious} aria-describedby="prevDesc" disabled={this.state.disabled}>Previous</button> |
+                            <button onClick={this.handleNext} aria-describedby="nextDesc">Next</button>
+                            <p id="prevDesc" className="hide">shows previous 20 grid results</p>
+                            <p id="nextDesc" className="hide">shows next 20 grid results</p>
+                        </div>
+                        <button onClick={this.handleClearStorage} className="storage" aria-describedby="storageDesc">Remove storage values</button>
+                        <p id="storageDesc" className="hide">Remove local storage values from browser</p>
                     </div>
-                </div>
+                    <Chart getStateValue={this.state} aria-describedby="chartDesc" />
+                    <p id="chartDesc" className="hide">Displaying line chart</p>
+                </>
             );
         } else {
             return (
-                <Spinner style={{ width: '3rem', height: '3rem' }} />
+                <>
+                    <Spinner style={{ width: '3rem', height: '3rem' }} aria-describedby="spinnerDesc" />
+                    <p id="spinnerDesc" className="hide">Loading...</p>
+                </>
             );
         }
     }
