@@ -1,3 +1,14 @@
+### SEO
+Added meta tags for search engine optimization
+
+### Reactstrap
+Reactstrap provides prebuilt Bootstrap 4 components that allow a great deal of flexibility and prebuilt components
+
+### Recharts
+Recharts provides charts functionality
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -68,12 +79,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 
-
-### SEO
-Added meta tags for search engine optimization
-
-### Reactstrap
-Reactstrap provides prebuilt Bootstrap 4 components that allow a great deal of flexibility and prebuilt components
-
-### Recharts
-Recharts provides charts functionality
