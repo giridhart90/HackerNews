@@ -5,7 +5,6 @@
   "homepage": "http://giridhart90.github.io/HackerNews",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
@@ -38,5 +37,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.18.1",
+    "enzyme": "^3.11.0",
+    "react-test-renderer": "^16.13.1"
   }
 }

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders app 1`] = `
+<div
+  className="hackersApp"
+>
+  <div
+    className="spinner"
+  >
+    <div
+      aria-describedby="spinnerDesc"
+      className="spinner-border"
+      role="status"
+      style={
+        Object {
+          "height": "3rem",
+          "width": "3rem",
+        }
+      }
+    >
+      <span
+        className="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+    <p
+      className="hide"
+      id="spinnerDesc"
+    >
+      Loading...
+    </p>
+  </div>
+</div>
+`;

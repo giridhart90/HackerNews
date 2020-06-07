@@ -10,6 +10,12 @@ Recharts provides charts functionality
 ### Accessibility
 Used NVDA app for accessibility
 
+### Responsive web design
+Both Reactstrap and Recharts are responsive
+
+### Jest
+Used for unit test case
+
 ### Deployed in github - Live Application
 https://giridhart90.github.io/HackerNews/
 

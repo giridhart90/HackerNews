@@ -11,7 +11,8 @@ class HackerTable extends Component {
             commentsData: null,
             pageNo: 1,
             disabled: true,
-            chartData: null
+            chartData: null,
+            error: null
         }
     }
 
@@ -29,7 +30,8 @@ class HackerTable extends Component {
                     this.setState({ commentsData });
                 }
                 this.generateChartData(this.state.commentsData);
-            });
+            })
+            .catch(error => this.setState({ error }));
     }
 
     componentDidMount() {
@@ -138,7 +140,7 @@ class HackerTable extends Component {
                                         <td>{item.points}</td>
                                         <td>
                                             <button onClick={(e) => this.handleUpVote(this, item.objectID)} role="button" aria-describedby="upvoteDesc">
-                                                <div className="upvote"><span className="hide">upvote</span></div>
+                                                <div className="upvote"></div>
                                             </button>
                                             <p id="upvoteDesc" className="hide">Increase the vote count</p>
                                         </td>
