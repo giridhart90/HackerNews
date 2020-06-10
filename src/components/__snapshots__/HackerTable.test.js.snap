@@ -1,42 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders Hacker Table Renders 1`] = `
+exports[`Hacker Table Renders 1`] = `
 <table
   className="table"
 />
 `;
 
-exports[`Renders HackerTable 1`] = `
-<div
-  className="spinner"
->
-  <div
-    aria-describedby="spinnerDesc"
-    className="spinner-border"
-    role="status"
-    style={
-      Object {
-        "height": "3rem",
-        "width": "3rem",
-      }
-    }
-  >
-    <span
-      className="sr-only"
-    >
-      Loading...
-    </span>
-  </div>
-  <p
-    className="hide"
-    id="spinnerDesc"
-  >
-    Loading...
-  </p>
-</div>
-`;
+exports[`Renders HackerTable 1`] = `undefined`;
 
-exports[`Renders Spinner Renders 1`] = `
+exports[`Spinner Renders 1`] = `
 <div
   className="spinner-border"
   role="status"

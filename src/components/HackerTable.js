@@ -92,14 +92,6 @@ class HackerTable extends Component {
         this.setState(prevState => {
             return { pageNo: prevState.pageNo - 1 }
         });
-
-        setTimeout(() => {
-            this.handleAPICall();
-
-            if (this.state.pageNo === 1) {
-                this.setState({ disabled: true });
-            }
-        }, 10);
     }
 
     //on click of next button action
@@ -107,10 +99,16 @@ class HackerTable extends Component {
         this.setState(prevState => {
             return { pageNo: prevState.pageNo + 1, disabled: false }
         });
+    }
 
-        setTimeout(() => {
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.pageNo !== this.state.pageNo) {
             this.handleAPICall();
-        }, 10);
+
+            if (this.state.pageNo === 1) {
+                this.setState({ disabled: true });
+            }
+        }
     }
 
     //on click clear storage
